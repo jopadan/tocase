@@ -85,12 +85,6 @@ bool dirtolower(char* dst, const char* path)
 		return false;
 	}
 
-	if(strcmp(dst, path) == 0 && (lstat(dst, &sb) == 0))
-	{
-		fprintf(stderr, "Source and destination strings are equal and already exist!\n");
-		return false;
-	}
-	 
 	if(rename(path, dst) != 0)
 	{
 		perror("renaming path to lower case");
