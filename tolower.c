@@ -81,10 +81,16 @@ bool dirtolower(char* dst, const char* path)
 
 	if(!strtolower(dst, path, strlen(path)))
 	{
-		perror("converting path string to lower case");
+		perror("ERROR: strtolower(): converting path string to lower case");
 		return false;
 	}
- 
+
+	if(strcmp(dst, path) == 0 && (lstat(dst, &sb) == 0))
+	{
+		fprintf(stderr, "Source and destination strings are equal and already exist!\n");
+		return false;
+	}
+	 
 	if(rename(path, dst) != 0)
 	{
 		perror("renaming path to lower case");
@@ -100,6 +106,7 @@ bool dirtolower(char* dst, const char* path)
 	chdir(dst);
 	while( n-- ) {
 		char * name = strdup(namelist[n]->d_name);
+
 		if(!renameable(name))
 		{
 			free(name);
@@ -117,10 +124,8 @@ bool dirtolower(char* dst, const char* path)
 			free(cwd);
 			return false;
 		}
-
 		if(namelist[n]->d_type == DT_DIR)
 		{
-			printf("recurse: %s\n",namelist[n]->d_name);
 			if(!dirtolower(name,namelist[n]->d_name))
 			{
 				perror("recurse directory");				
@@ -155,10 +160,11 @@ int main(int argc, char** argv)
 		char* lower = strdup(argv[1]);
 		if(!dirtolower(lower,argv[1]))
 		{
-			perror("dirtolower");
+			fprintf(stderr,"conversion of %s -> %s not successful!\n", argv[1], lower);
 			free(lower);
 			exit(EXIT_FAILURE);
 		}
+		fprintf(stdout,"%s -> %s\n", argv[1], lower);
 	}
 	else
 	{
