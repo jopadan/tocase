@@ -151,18 +151,22 @@ int main(int argc, char** argv)
 
 	if(argc > 1)
 	{
-		char* lower = strdup(argv[1]);
-		if(!dirtolower(lower,argv[1]))
+		for(int i = 1; i < argc; i++)
 		{
-			fprintf(stderr,"conversion of %s -> %s not successful!\n", argv[1], lower);
+			char* lower = strdup(argv[i]);
+			if(!dirtolower(lower,argv[i]))
+			{
+				fprintf(stderr,"conversion of %s -> %s not successful!\n", argv[i], lower);
+				free(lower);
+				exit(EXIT_FAILURE);
+			}
+			fprintf(stdout,"%s -> %s\n", argv[i], lower);
 			free(lower);
-			exit(EXIT_FAILURE);
 		}
-		fprintf(stdout,"%s -> %s\n", argv[1], lower);
 	}
 	else
 	{
-		fprintf(stderr,"Usage: tolower PATH...\nConvert PATH directory name recursively to lowercase\n");
+		fprintf(stderr,"Usage: tolower PATH...\nConvert PATH names recursively to lowercase\n");
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_SUCCESS);
