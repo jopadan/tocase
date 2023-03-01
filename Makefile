@@ -4,7 +4,7 @@ INSTALL ?= install
 RM ?= rm
 PREFIX ?= /usr/local
 BINDIR ?= bin
-CXXFLAGS ?= -std=gnu++23 -march=native -O3 -pipe
+CXXFLAGS ?= -Icpp-unicodelib -std=gnu++23 -march=native -O3 -pipe
 
 ifdef _WIN32
 OBJECT_EXT ?= .obj

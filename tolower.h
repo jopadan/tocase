@@ -5,17 +5,11 @@
 #include <algorithm>
 #include <string>
 
+#include "unicodelib.h"
+#include "unicodelib_encodings.h"
+
 namespace std
 {
-	string tolower(const string& str)
-	{
-		std::string dst(str);
-		for(string::iterator i = dst.begin(); i != dst.end(); i++)
-			*i = tolower(*i);
-
-		return dst;	
-	}
-
 	namespace filesystem
 	{
 		const bool recursive = true;
@@ -26,7 +20,7 @@ namespace std
 			if(exists(src))
 			{
 				path dst = src;
-				dst.replace_filename(tolower(src.native()));
+				dst.replace_filename(unicode::to_lowercase(src.u32string()));
 				rename(src, dst);
 				std::cout << src << " -> " << dst << std::endl;
 				src = dst;
