@@ -9,7 +9,7 @@ git clone --recurse-submodules --recusive http://github.com/jopadan/tolower
 ```
 ## Dependencies
 
-- [cpp-unicodelib](http://github.com/yhirose/cpp-unicodelib
+- [cpp-unicodelib](http://github.com/yhirose/cpp-unicodelib)
 
 ## Building
 
