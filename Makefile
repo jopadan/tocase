@@ -1,10 +1,10 @@
 PROGRAM=tolower
-GCC ?= gcc
+CXX ?= g++
 INSTALL ?= install
 RM ?= rm
 PREFIX ?= /usr/local
 BINDIR ?= bin
-CFLAGS ?= -march=native -O2 -pipe
+CXXFLAGS ?= -std=gnu++23 -march=native -O3 -pipe
 
 ifdef _WIN32
 OBJECT_EXT ?= .obj
@@ -17,10 +17,10 @@ endif
 all: $(PROGRAM)
 
 tolower: $(PROGRAM)$(OBJECT_EXT)
-	$(GCC) $(CFLAGS) -o $(PROGRAM) $(PROGRAM)$(OBJECT_EXT)
+	$(CXX) $(CXXFLAGS) -o $(PROGRAM) $(PROGRAM)$(OBJECT_EXT)
 
-tolower$(OBJECT_EXT): $(PROGRAM).c
-	$(GCC) $(CFLAGS) -c $(PROGRAM).c
+tolower$(OBJECT_EXT): $(PROGRAM).cpp
+	$(CXX) $(CXXFLAGS) -c $(PROGRAM).cpp
 clean:
 	$(RM) -rf $(PROGRAM)$(OBJECT_EXT) $(PROGRAM)$(EXECUTABLE_EXT)
 
