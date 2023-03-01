@@ -1,5 +1,5 @@
 #pragma once
-#include <cctype>
+#include <locale>
 #include <filesystem>
 #include <iostream>
 #include <algorithm>
@@ -11,9 +11,8 @@ namespace std
 	{
 		std::string dst(str);
 		for(string::iterator i = dst.begin(); i != dst.end(); i++)
-		{
 			*i = tolower(*i);
-		}
+
 		return dst;	
 	}
 
