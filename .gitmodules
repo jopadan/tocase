@@ -1,0 +1,3 @@
+[submodule "cpp-unicodelib"]
+	path = cpp-unicodelib
+	url = http://github.com/yhirose/cpp-unicodelib
