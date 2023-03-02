@@ -1,11 +1,11 @@
-# tolower
+# tocase
 
-Convert directories recursivly to lowercase using C++ std::filesystem and unicode-org/icu
+single-file header-only icu based recursive path case convert
 
 ## Downloading
 
 ```sh
-git clone --recurse-submodules --recusive http://github.com/jopadan/tolower
+git clone --recurse-submodules --recusive http://github.com/jopadan/tocase
 ```
 
 ## Dependencies
@@ -32,6 +32,7 @@ path = tocase(path, std::simple_lowercase, std::filesystem::recursive);
 path = tocase(path, std::simple_lowercase, std::filesystem::none);
 ```
 
+## Example 
 ```sh
 tolower [PATH]...
 ```
