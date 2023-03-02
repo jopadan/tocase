@@ -20,6 +20,18 @@ PREFIX=[prefix] make install
 
 ## Usage
 
+```c++
+#include "tocase.h"
+
+std::filesystem::path path;
+
+/* rename path and all of its contents recursively */
+path = tocase(path, std::simple_lowercase, std::filesystem::recursive);
+
+/* rename only path and none of its contents */
+path = tocase(path, std::simple_lowercase, std::filesystem::none);
+```
+
 ```sh
 tolower [PATH]...
 ```

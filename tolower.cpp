@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>
-#include "tolower.h"
+#include "tocase.h"
 
 int main(int argc, char** argv)
 {
@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 	for(int i=1; i < argc; i++)
 	{
 		argv_path[i] = argv[i];
-		argv_path[i] = std::filesystem::tolower(argv_path[i], true);
+		argv_path[i] = std::filesystem::tocase(argv_path[i], std::simple_lowercase, std::filesystem::recursive);
 	}
 
 	exit(EXIT_SUCCESS);

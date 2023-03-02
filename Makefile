@@ -4,7 +4,8 @@ INSTALL ?= install
 RM ?= rm
 PREFIX ?= /usr/local
 BINDIR ?= bin
-CXXFLAGS ?= -std=gnu++23 -march=native -O3 -pipe -D_FILE_OFFSET_BITS=64 -fdata-sections -ffunction-sections -Wall -Wextra -Wpedantic -Wl,--gc-sections -Wl,--print-gc-sections -Wl,-s -licuuc
+LDFLAGS += -Wl,--gc-sections -Wl,-s -licuuc
+CXXFLAGS ?= -std=gnu++23 -march=native -O3 -pipe -D_FILE_OFFSET_BITS=64 -fdata-sections -ffunction-sections -Wall -Wextra -Wpedantic ${LDFLAGS} 
 
 ifdef _WIN32
 OBJECT_EXT ?= .obj
