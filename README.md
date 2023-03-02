@@ -1,6 +1,6 @@
 # tocase
 
-single-file header-only icu based recursive path case convert
+single-file header-only recursive unicode path case convert using icu
 
 ## Downloading
 
