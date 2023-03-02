@@ -1,15 +1,19 @@
 #pragma once
-#include <locale>
 #include <filesystem>
 #include <iostream>
 #include <algorithm>
 #include <string>
-
-#include "unicodelib.h"
-#include "unicodelib_encodings.h"
+#include <unicode/uchar.h>
 
 namespace std
 {
+	u32string tolower(const u32string& str)
+	{
+		u32string out;
+		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
+			out += u_tolower(*i);
+		return out;
+	}
 	namespace filesystem
 	{
 		const bool recursive = true;
@@ -20,7 +24,7 @@ namespace std
 			if(exists(src))
 			{
 				path dst = src;
-				dst.replace_filename(unicode::to_lowercase(src.u32string()));
+				dst.replace_filename(std::tolower(src.u32string()));
 				rename(src, dst);
 				std::cout << src << " -> " << dst << std::endl;
 				src = dst;

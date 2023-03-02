@@ -1,26 +1,21 @@
 # tolower
 
-Convert directories recursivly to lowercase using C++ std::filesystem and cpp-unicodelib
+Convert directories recursivly to lowercase using C++ std::filesystem and unicode-org/icu
 
 ## Downloading
 
 ```sh
 git clone --recurse-submodules --recusive http://github.com/jopadan/tolower
 ```
+
 ## Dependencies
 
-- [cpp-unicodelib](http://github.com/yhirose/cpp-unicodelib)
+- [unicode-org/icu](http://github.com/unicode-org/icu)
 
 ## Building
 
 ```sh
-make
-```
-
-## Install
-
-```sh
-make install
+PREFIX=[prefix] make install
 ```
 
 ## Usage
