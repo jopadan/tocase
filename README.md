@@ -32,6 +32,10 @@ path = tocase(path, std::simple_lowercase, std::filesystem::recursive);
 path = tocase(path, std::simple_lowercase, std::filesystem::none);
 ```
 
+```sh
+g++ -std=gnu++23 tolower.cpp -licuuc -o tolower
+```
+
 ## Example 
 ```sh
 tolower [PATH]...
