@@ -5,7 +5,7 @@ single-file header-only recursive unicode path case convert using icu
 ## Downloading
 
 ```sh
-git clone --recurse-submodules --recusive http://github.com/jopadan/tocase
+git clone --recurse-submodules --recursive http://github.com/jopadan/tocase
 ```
 
 ## Dependencies
