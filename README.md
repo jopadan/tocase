@@ -15,7 +15,7 @@ git clone --recurse-submodules --recusive http://github.com/jopadan/tocase
 ## Building
 
 ```sh
-PREFIX=[prefix] make install
+cmake . --install-prefix=[prefix] && make install
 ```
 
 ## Usage
@@ -30,15 +30,6 @@ path = tocase(path, std::simple_lowercase, std::filesystem::recursive);
 
 /* rename only path and none of its contents */
 path = tocase(path, std::simple_lowercase, std::filesystem::none);
-```
-
-```sh
-g++ -std=gnu++23 tolower.cpp -licuuc -o tolower
-```
-
-## Example 
-```sh
-tolower [PATH]...
 ```
 
 ## Credits

@@ -20,11 +20,6 @@ add_link_options(-Wl,--gc-sections)
 #add_link_options(-Wl,--print-gc-sections)
 add_link_options(-Wl,-s)
 
-# input sources
-file(GLOB TOCASE_SOURCES LIST_DIRECTORIES FALSE CONFIGURE_DEPENDS FALSE
-	PATTERN *.cpp)
-list(FILTER TOCASE_SOURCES EXCLUDE REGEX test.c)
-
 # external dependencies
 find_package(ICU)
 
@@ -41,7 +36,7 @@ set_target_properties(totitle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY
 add_executable(foldcase foldcase.cpp) 
 set_target_properties(foldcase PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-install(TARGETS tolower toupper totitle EXPORT ${PROJECT_NAME}Export
+install(TARGETS tolower toupper totitle foldcase EXPORT ${PROJECT_NAME}Export
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 	)
