@@ -2,3 +2,15 @@ tolower
 tolower.exe
 tolower.o
 tolower.obj
+toupper
+toupper.exe
+toupper.o
+toupper.obj
+totitle
+totitle.exe
+totitle.o
+totitle.obj
+foldcase
+foldcase.exe
+foldcase.o
+foldcase.obj

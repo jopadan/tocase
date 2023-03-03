@@ -38,6 +38,8 @@ add_executable(toupper toupper.cpp)
 set_target_properties(toupper PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_executable(totitle totitle.cpp) 
 set_target_properties(totitle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+add_executable(foldcase foldcase.cpp) 
+set_target_properties(foldcase PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 install(TARGETS tolower toupper totitle EXPORT ${PROJECT_NAME}Export
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
