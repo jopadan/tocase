@@ -88,7 +88,7 @@ namespace std
 			if(exists(src))
 			{
 				path dst = src;
-				dst.replace_filename(std::tocase(src.u32string(), mode));
+				dst.replace_filename(std::tocase(src.filename().u32string(), mode));
 				rename(src, dst);
 				std::cout << src << " -> " << dst << std::endl;
 				src = dst;
@@ -98,7 +98,7 @@ namespace std
 					while(dir_iter != end(dir_iter))
 					{
 						const directory_entry& dir_entry = *dir_iter++;
-						tocase((path&)dir_entry.path(), simple_lowercase, traverse);
+						tocase((path&)dir_entry.path(), mode, traverse);
 					}
 				}
 
