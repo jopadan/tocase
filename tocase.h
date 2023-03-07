@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <map>
 #include <unicode/uchar.h>
 
 namespace std
@@ -17,59 +18,40 @@ namespace std
 	};
 
 	typedef enum case_mode_e case_mode;
-
-	u32string tolower(const u32string& str)
+	std::map<std::string, case_mode> case_mode_from_str =
 	{
-		u32string out;
-		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
-			out += u_tolower(*i);
-		return out;
-	}
-
-	u32string toupper(const u32string& str)
-	{
-		u32string out;
-		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
-			out += u_toupper(*i);
-		return out;
-	}
-
-	u32string totitle(const u32string& str)
-	{
-		u32string out;
-		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
-			out += u_totitle(*i);
-		return out;
-	}
-
-	u32string foldcase(const u32string& str)
-	{
-		u32string out;
-		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
-			out += u_foldCase(*i, U_FOLD_CASE_DEFAULT);
-		return out;
-	}
+		{ "none"    ,  none },
+		{ "lower"   , simple_lowercase },
+		{ "upper"   , simple_uppercase },
+		{ "title"   , simple_titlecase },
+		{ "fold"    , simple_casefolding },
+	};
 
 	u32string tocase(const u32string& str, case_mode mode = none)
 	{
-		switch(mode)
+		u32string out;
+		for(u32string::const_iterator i = str.begin(); i != str.end(); i++)
 		{
-			case simple_lowercase:
-				return tolower(str);
-				break; 
-			case simple_uppercase:
-				return toupper(str);
-				break;
-			case simple_titlecase:
-				return totitle(str);
-				break;
-			case simple_casefolding:
-				return foldcase(str);
-				break;
-			default:
-				break;
+			switch(mode)
+			{
+				case simple_lowercase:
+					out += u_tolower(*i);
+					break; 
+				case simple_uppercase:
+					out += u_toupper(*i);
+					break;
+				case simple_titlecase:
+					out += u_totitle(*i);
+					break;
+				case simple_casefolding:
+					out += u_foldCase(*i, U_FOLD_CASE_DEFAULT);
+					break;
+				default:
+					out += *i;
+					break;
+			}
 		}
-		return str;
+		return out;
 	}
 
 	namespace filesystem

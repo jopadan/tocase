@@ -1,3 +1,6 @@
+.to*.*
+tocase
+tocase.exe
 tolower
 tolower.exe
 tolower.o

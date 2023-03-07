@@ -27,16 +27,10 @@ find_package(ICU)
 include_directories(${ICU_INCLUDE_DIRS} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 link_libraries(icuuc)
 
-add_executable(tolower tolower.cpp) 
-set_target_properties(tolower PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-add_executable(toupper toupper.cpp) 
-set_target_properties(toupper PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-add_executable(totitle totitle.cpp) 
-set_target_properties(totitle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-add_executable(foldcase foldcase.cpp) 
-set_target_properties(foldcase PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+add_executable(tocase tocase.cpp) 
+set_target_properties(tocase PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-install(TARGETS tolower toupper totitle foldcase EXPORT ${PROJECT_NAME}Export
+install(TARGETS tocase EXPORT ${PROJECT_NAME}Export
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 	)
