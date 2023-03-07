@@ -11,10 +11,33 @@ using namespace std::filesystem;
 
 static case_mode mode = simple_lowercase;
 static traverse_mode traverse = std::filesystem::none;
+void config_args(int argc, char** argv);
 
-bool config_args(int argc, char** argv)
+int main(int argc, char** argv)
+{
+	if(argc < 2)
+	{
+		std::cerr << "Usage: " << argv[0] << "[-r] [--case=[case]] PATH..." << std::endl
+			<< "Convert PATH names [recursivly] to case" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	config_args(argc, argv);
+
+	std::vector<path> path_arg;
+	for(int i=optind; i < argc; i++)
+	{		
+		path_arg.push_back(argv[i]);
+		path_arg[i-optind] = tocase(path_arg[i-optind], mode, traverse);
+	}
+
+	exit(EXIT_SUCCESS);
+}
+
+void config_args(int argc, char** argv)
 {
 	int c;
+
 	while(1)
 	{
 		int option_index;
@@ -28,7 +51,7 @@ bool config_args(int argc, char** argv)
 
 		c = getopt_long(argc, argv, "rc:", long_options, &option_index);
 		if(c == -1)
-			return false;
+			break;
 
 		switch(c)
 		{
@@ -39,27 +62,10 @@ bool config_args(int argc, char** argv)
 				mode = case_mode_from_str[std::string(optarg)];
 				break;
 			default:
-				return false;
+				std::cerr << "Usage: " << argv[0] << "[-r] [--case=[case]] PATH..." << std::endl
+					<< "Convert PATH names [recursivly] to case" << std::endl;
+				exit(EXIT_FAILURE);
 				break;
 		}
 	}
-	return true;
-}
-
-int main(int argc, char** argv)
-{
-	if(argc < 2 || !config_args(argc, argv))
-	{
-		std::cerr << "Usage: " << argv[0] << "[-r] [--case=[case]] PATH..." << std::endl
-			<< "Convert PATH names [recursivly] to case" << std::endl;
-		exit(EXIT_FAILURE);
-	}			
-	std::vector<path> path_arg;
-	for(int i=optind; i < argc; i++)
-	{		
-		path_arg.push_back(argv[i]);
-		path_arg[i-optind] = tocase(path_arg[i-optind], mode, traverse);
-	}
-
-	exit(EXIT_SUCCESS);
 }
