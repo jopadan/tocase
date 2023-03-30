@@ -21,6 +21,7 @@ cmake . --install-prefix=[prefix] && make install
 
 ```sh
 mkdir -p FoE/DsAseE/dfRe.dESDf && touch FoE/DsAseE/dfRe.dESDf/fEe.ReE
+tocase -c lower FoE/DsAseE/dfRe.dESDf
 tocase -r -c lower FoE && rm -rf foe
 ```
 
