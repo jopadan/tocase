@@ -21,15 +21,29 @@ cmake . --install-prefix=[prefix] && make install
 ## Usage
 
 ```c++
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
 #include "tocase.h"
 
-std::filesystem::path path;
+using namespace std;
+using namespace std::filesystem;
+
+path src = argv[1];
+case_mode mode = case_mode_from_str["lower"];
+traverse_mode traverse = traverse_mode::recursive;
 
 /* rename path and all of its contents recursively */
-path = tocase(path, std::simple_lowercase, std::filesystem::recursive);
+src = tocase(src, mode, traverse_moode::recursive);
+cout << src << std::endl;
 
 /* rename only path and none of its contents */
-path = tocase(path, std::simple_lowercase, std::filesystem::none);
+src = tocase(src, mode, traverse_mode::none);
+cout << src << std::endl;
+```
+
+```sh
+g++ -std=gnu++23 -I<location of directory including tocase.h> <file.cpp> -licuuc
 ```
 
 ## Credits
