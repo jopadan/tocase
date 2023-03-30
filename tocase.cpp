@@ -9,19 +9,15 @@
 using namespace std;
 using namespace std::filesystem;
 
-static case_mode mode = simple_lowercase;
-static traverse_mode traverse = std::filesystem::none;
+/* initialize default options */
+static case_mode mode = case_mode::simple_lowercase;
+static traverse_mode traverse = traverse_mode::none;
+
+void print_usage(const char* program_file);
 void config_args(int argc, char** argv);
 
 int main(int argc, char** argv)
 {
-	if(argc < 2)
-	{
-		std::cerr << "Usage: " << argv[0] << "[-r] [--case=[case]] PATH..." << std::endl
-			<< "Convert PATH names [recursivly] to case" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-
 	config_args(argc, argv);
 
 	std::vector<path> path_arg;
@@ -34,36 +30,42 @@ int main(int argc, char** argv)
 	exit(EXIT_SUCCESS);
 }
 
+void print_usage(const char* program_file)
+{
+	std::cerr << "Usage: " << program_file << "[-r] [--case=[case]] PATH..." << std::endl
+		<< "Convert PATH names [recursivly] to case" << std::endl;
+}
+
 void config_args(int argc, char** argv)
 {
-	int c;
-
-	while(1)
+	if(argc < 2)
 	{
-		int option_index;
+		print_usage(argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
-		static struct option long_options[] = {
-			{ "recursive", no_argument, 0, 'r' },
-			{ "case", required_argument, 0, 'c' },
-			{ "file", required_argument, 0, 0 },
-			{ NULL, 0, NULL, 0 },
-		};
+	int opt;
+	int option_index;
 
-		c = getopt_long(argc, argv, "rc:", long_options, &option_index);
-		if(c == -1)
-			break;
+	static struct option long_options[] = {
+		{ "recursive", no_argument, 0, 'r' },
+		{ "case", required_argument, 0, 'c' },
+		{ "file", required_argument, 0, 0 },
+		{ NULL, 0, NULL, 0 },
+	};
 
-		switch(c)
+	while((opt = getopt_long(argc, argv, "rc:", long_options, &option_index)) != -1)
+	{
+		switch(opt)
 		{
 			case 'r':
-				traverse = std::filesystem::recursive;
+				traverse = traverse_mode::recursive;
 				break;
 			case 'c':
 				mode = case_mode_from_str[std::string(optarg)];
 				break;
 			default:
-				std::cerr << "Usage: " << argv[0] << "[-r] [--case=[case]] PATH..." << std::endl
-					<< "Convert PATH names [recursivly] to case" << std::endl;
+				print_usage(argv[0]);
 				exit(EXIT_FAILURE);
 				break;
 		}
